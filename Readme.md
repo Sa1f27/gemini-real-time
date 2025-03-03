@@ -38,13 +38,8 @@ Follow these steps to get started:
 
 3. **Create a separate environment** (recommended)
    ```bash
-   # Windows
    python -m venv env
    env\Scripts\activate
-
-   # Mac/Linux
-   python -m venv env
-   source env/bin/activate
    ```
 
 4. **Install required packages**
@@ -59,28 +54,34 @@ Follow these steps to get started:
      GOOGLE_API_KEY = your_api_key_here
      ```
 
+6. In the main.py file, hash all mode examples and unhash just one at a time to use a specific feature:
+
+```bash
+# Examples:
+# To run audio mode:
+main(input_mode=INPUT_MODE_AUDIO)
+    
+# To run text mode:
+# main(input_mode=INPUT_MODE_TEXT)
+    
+# To run camera mode:
+# main(input_mode=INPUT_MODE_CAMERA)
+
+# To run screen mode with monitor index:
+# main(input_mode=INPUT_MODE_SCREEN, monitor_index=DEFAULT_MONITOR_INDEX)
+```
+
 ## Using the Assistant
 
-### Voice Mode
 To talk with the assistant:
 ```bash
 python main.py
-```
-or
-```bash
-python main.py --input_mode audio
-```
-
-### Text Mode
-To type messages instead:
-```bash
-python main.py --input_mode text
 ```
 
 ## How It's Organized
 
 ```
-gemini-voice-assistant/
+gemini-real-time/
 ├── .env
 ├── .gitignore
 ├── main.py
