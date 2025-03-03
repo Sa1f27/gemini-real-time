@@ -26,7 +26,17 @@ class AudioOnlyHandler:
         self.audio_out_queue = asyncio.Queue()
         self.ai_speaking = False
         self.client = genai.Client(http_options={"api_version": API_VERSION})
-        self.CONFIG = {"generation_config": {"response_modalities": ["AUDIO"]}}
+        self.CONFIG = {
+                    "generation_config": {
+                        "response_modalities": ["AUDIO"],
+                        "system_instruction": (
+                            "You are a professional interviewer. Your goal is to ask engaging, thoughtful questions on the topic of ai and ml"
+                            "to the user, as if conducting an interview. Start by greeting the user and asking an "
+                            "open-ended question to get the conversation going. Keep the tone friendly, curious, "
+                            "and professional."
+                        )
+                    }
+                }
         self.pya = pyaudio.PyAudio()
 
     async def send_audio(self, session):

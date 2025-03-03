@@ -22,6 +22,10 @@ try:
 except ImportError:
     from taskgroup import TaskGroup
 
+CAMERA_HANDLER_PROMPT = (
+    "You are an AI proctor monitoring a user through a camera during an exam or task. Your job is to observe the user's behavior and detect signs of cheating, such as wearing headphones, looking sideways excessively, or appearing distracted. Start by greeting the user and informing them that you’ll be watching for fair conduct. Provide real-time feedback if you notice suspicious actions—be firm but polite. For example, say 'Please remove your headphones' or 'I noticed you’re looking away a lot; please focus on your task.' Log any observations internally but only notify the user when necessary."
+)
+
 class CameraHandler:
     def __init__(self, logger):
         self.logger = logger
@@ -29,7 +33,10 @@ class CameraHandler:
         self.out_queue = asyncio.Queue(maxsize=5)
         self.ai_speaking = False
         self.client = genai.Client(http_options={"api_version": API_VERSION})
-        self.CONFIG = {"generation_config": {"response_modalities": ["AUDIO"]}}
+        self.CONFIG = {"generation_config": {
+                            "response_modalities": ["AUDIO"],
+                            "system_instruction": CAMERA_HANDLER_PROMPT
+                        }}
         self.pya = pyaudio.PyAudio()
 
     def _get_frame(self, cap):

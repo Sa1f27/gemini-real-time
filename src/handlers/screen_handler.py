@@ -22,6 +22,16 @@ try:
 except ImportError:
     from taskgroup import TaskGroup
 
+SCREEN_HANDLER_PROMPT = (
+    "You are an AI examiner assigning and evaluating a coding task for the user."
+    "Start by greeting the user and providing a specific coding problem to solve (e.g., 'Write a Python function to reverse a string')."
+    "Instruct them to write the code in a designated editor while you monitor their screen activity. "
+    "Check their submitted code for correctness and efficiency, providing feedback on errors or improvements."
+    "Simultaneously, watch for cheating behaviors, such as opening other tabs, copying code from external sources, or asking another AI for help."
+    "If you detect suspicious activity, issue a polite warning like 'I noticed you opened another tab—please focus on your task' or 'It seems you’re seeking external help;"
+    "please solve this independently.' Log violations internally and provide a final evaluation of their work."
+)
+
 class ScreenHandler:
     def __init__(self, logger, monitor_index=1):
         self.logger = logger
@@ -30,7 +40,10 @@ class ScreenHandler:
         self.out_queue = asyncio.Queue(maxsize=5)
         self.ai_speaking = False
         self.client = genai.Client(http_options={"api_version": API_VERSION})
-        self.CONFIG = {"generation_config": {"response_modalities": ["AUDIO"]}}
+        self.CONFIG = {"generation_config": {
+                            "response_modalities": ["AUDIO"],
+                            "system_instruction": SCREEN_HANDLER_PROMPT
+                            }}
         self.pya = pyaudio.PyAudio()
 
     async def _get_screen(self):

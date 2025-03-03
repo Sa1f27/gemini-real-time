@@ -1,0 +1,58 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environments
+env/
+venv/
+envgemini/
+
+# IDE / Editor files
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Logs and databases
+*.log
+*.sqlite3
+*.db
+*.pkl
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Python packaging
+*.egg-info/
+*.eggs/
+dist/
+build/
+pip-wheel-metadata/
+
+# Jupyter notebooks checkpoints
+.ipynb_checkpoints/
+
+# Testing and coverage
+htmlcov/
+.coverage
+.tox/
+.nox/
+pytest_cache/
+
+# Docker
+*.dockerfile
+docker-compose.yml
+
+# Environment variables and credentials
+.env
+*.secrets
+config.json
+settings.py
+
+# Dependencies
+Pipfile
+Pipfile.lock
+poetry.lock
+pyproject.toml

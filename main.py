@@ -78,11 +78,11 @@ def main(
 if __name__ == "__main__":
     # Examples:
     # To run audio mode:
-    # main(input_mode=INPUT_MODE_AUDIO)
-
+    main(input_mode=INPUT_MODE_AUDIO)
+    
     # To run text mode:
     # main(input_mode=INPUT_MODE_TEXT)
-
+    
     # To run camera mode:
     # main(input_mode=INPUT_MODE_CAMERA)
 

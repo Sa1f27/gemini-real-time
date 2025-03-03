@@ -16,13 +16,20 @@ try:
 except ImportError:
     from taskgroup import TaskGroup
 
+TEXT_HANDLER_PROMPT = (
+    "You are a skilled text-based interviewer conducting a conversational interview. Your role is to engage the user with thoughtful, open-ended questions in a friendly and professional tone. Begin by greeting the user warmly and asking an initial question to spark the conversation, such as their interests, experiences, or goals. Follow up on their responses with curiosity and ask relevant, probing questions to keep the dialogue flowing naturally."
+)
+
 class TextOnlyHandler:
     def __init__(self, logger):
         self.logger = logger
         self.audio_in_queue = asyncio.Queue()
         self.ai_speaking = False
         self.client = genai.Client(http_options={"api_version": API_VERSION})
-        self.CONFIG = {"generation_config": {"response_modalities": ["AUDIO"]}}
+        self.CONFIG = {"generation_config": {
+                        "response_modalities": ["AUDIO"],
+                        "system_instruction": TEXT_HANDLER_PROMPT
+                    }}
         self.pya = pyaudio.PyAudio()
 
     async def send_text(self, session):
