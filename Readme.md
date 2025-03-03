@@ -1,4 +1,6 @@
-# Gemini Voice Assistant
+# AI Interviewer
+
+### Gemini Voice Assistant
 
 A practical tool for interacting with Google's AI through voice, camera, screen, and text. This project creates a seamless experience for communicating with an AI assistant using multiple input methods.
 
